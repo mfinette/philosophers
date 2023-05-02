@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxime <maxime@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 11:13:08 by maxime            #+#    #+#             */
-/*   Updated: 2023/04/24 15:37:31 by maxime           ###   ########.fr       */
+/*   Updated: 2023/05/02 11:30:03 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <sys/time.h>
 
 /* PHILO MESSAGES*/
-
 # define MSG_FORK "has taken a fork"
 # define MSG_EAT "is eating"
 # define MSG_SLEEP "is sleeping"
@@ -31,11 +30,11 @@
 # define MSG_DIE "died"
 
 /* PHILO STATES */
-
 # define EATING 1
 # define SLEEPING 2
 # define THINKING 3
 # define DEAD 4
+# define TAKINGFORK 5
 
 typedef struct s_data	t_data;
 
@@ -58,25 +57,22 @@ typedef struct s_data
 	int						time_to_sleep;
 	int						num_of_must_eat;
 	int						end;
-	int						i;
 	t_philo					**tab_philo;
 	pthread_mutex_t			print;
 }			t_data;
 
 /* PARSING */
-
 int					check_args(int argc, char **argv);
-t_data				parse_data(int argc, char **argv);
+t_data				*parse_data(int argc, char **argv);
 int					check_args(int argc, char **argv);
 int					check_str(char *str);
 
 /* INITIALIZATION */
-
 int					init_all_philo(t_data *data);
-void				init_one_philo(t_philo *philo, t_data *data, int philo_index);
+void				init_one_philo(t_philo *philo, t_data *data, \
+int philo_index);
 
 /* STATES */
-
 int					eat_even(t_philo **tab_philo, t_data *data, int i);
 int					eat_odd(t_philo **tab_philo, t_data *data, int i);
 int					sleeping(t_philo *philo, t_data *data);
@@ -84,7 +80,6 @@ int					thinking(t_philo *philo, t_data *data);
 int					eating(t_philo **tab_philo, t_data *data, int i);
 
 /* UTILS */
-
 int					ft_atoi(const char *str);
 void				wait(unsigned long long time_ms);
 unsigned long long	get_time(void);
@@ -93,13 +88,11 @@ int					monitoring(t_data	*data);
 int					has_eaten_enough(t_philo *philo);
 
 /* LIFE */
-
-void				wait_all_threads(t_philo *philo);
-void				*routine(void	*data_void);
-void				start_simulation(t_data *data);
+void				get_starting_point(t_philo *philo);
+void				*life(void	*data_void);
+void				live_life(t_data *data);
 
 /* DEATH */
-
 int					is_dead(t_philo *philo, t_data *data);
 int					check_death(t_data *data);
 

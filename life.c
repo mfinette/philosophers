@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   life.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxime <maxime@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:17:14 by maxime            #+#    #+#             */
-/*   Updated: 2023/04/24 12:42:04 by maxime           ###   ########.fr       */
+/*   Updated: 2023/05/02 11:49:34 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	wait_all_threads(t_philo *philo)
+void	get_starting_point(t_philo *philo)
 {
 	unsigned long long	start_time;
 
@@ -27,28 +27,28 @@ void	wait_all_threads(t_philo *philo)
 	}
 }
 
-void	*routine(void	*data_void)
+void	*life(void	*data_void)
 {
-	int			i;
 	t_philo		*philo;
+	int			i;
 
 	philo = (t_philo *)data_void;
 	i = philo->id - 1;
-	wait_all_threads(philo);
+	get_starting_point(philo);
 	usleep(100 * philo->data->num_of_philo);
 	while (1)
 	{
-		if (thinking(philo, philo->data) == -1)
-			return (NULL);
 		if (eating(philo->data->tab_philo, philo->data, i) == -1)
 			return (NULL);
 		if (sleeping(philo, philo->data) == -1)
+			return (NULL);
+		if (thinking(philo, philo->data) == -1)
 			return (NULL);
 	}
 	return (NULL);
 }
 
-void	start_simulation(t_data *data)
+void	live_life(t_data *data)
 {
 	int	i;
 
@@ -56,7 +56,7 @@ void	start_simulation(t_data *data)
 	while (i < data->num_of_philo)
 	{
 		pthread_create(&data->tab_philo[i]->thread_id, \
-		NULL, routine, data->tab_philo[i]);
+		NULL, life, data->tab_philo[i]);
 		i++;
 	}
 	pthread_mutex_lock(&data->print);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxime <maxime@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:00:06 by maxime            #+#    #+#             */
-/*   Updated: 2023/04/24 12:46:56 by maxime           ###   ########.fr       */
+/*   Updated: 2023/05/01 18:18:59 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,19 @@ int	print(t_philo *philo, t_data *data, int state)
 	if (data->end)
 		return (pthread_mutex_unlock(&data->print), -1);
 	if (state == THINKING && !data->end)
-		printf("\e[033m%llu %d is thinking\e[0m\n", get_time() \
+		printf("%llu %d is thinking\n", get_time() \
 		- data->start_time, philo->id);
 	if (state == EATING && !data->end)
-		printf("\e[031m%llu %d is eating\e[0m\n", get_time() \
+		printf("%llu %d is eating\n", get_time() \
 		- data->start_time, philo->id);
 	if (state == SLEEPING && !data->end)
-		printf("\e[034m%llu %d is sleeping\e[0m\n", get_time() \
+		printf("%llu %d is sleeping\n", get_time() \
 		- data->start_time, philo->id);
 	if (state == DEAD && !data->end)
-		printf("\e[41m%llu %d died\e[0m\n", get_time() \
+		printf("%llu %d died\n", get_time() \
 		- data->start_time, philo->id);
-	if (state == 42 && !data->end)
-		printf("\e[0;32m%llu %d has taken a fork\e[0m\n", get_time() \
+	if (state == TAKINGFORK && !data->end)
+		printf("%llu %d has taken a fork\n", get_time() \
 		- data->start_time, philo->id);
 	pthread_mutex_unlock(&data->print);
 	return (0);

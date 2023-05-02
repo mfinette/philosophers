@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxime <maxime@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 11:40:18 by maxime            #+#    #+#             */
-/*   Updated: 2023/04/24 12:13:30 by maxime           ###   ########.fr       */
+/*   Updated: 2023/05/02 11:31:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-
 
 int	check_str(char *str)
 {
@@ -72,20 +70,24 @@ int	init_all_philo(t_data *data)
 	return (0);
 }
 
-t_data	parse_data(int argc, char **argv)
+t_data	*parse_data(int argc, char **argv)
 {
-	t_data	data;
+	t_data	*data;
 
-	data.num_of_philo = ft_atoi(argv[1]);
-	data.time_to_die = ft_atoi(argv[2]);
-	data.time_to_eat = ft_atoi(argv[3]);
-	data.time_to_sleep = ft_atoi(argv[4]);
-	data.num_of_must_eat = -1;
-	data.end = 0;
-	data.start_time = 0;
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (NULL);
+	data->num_of_philo = ft_atoi(argv[1]);
+	data->time_to_die = ft_atoi(argv[2]);
+	data->time_to_eat = ft_atoi(argv[3]);
+	data->time_to_sleep = ft_atoi(argv[4]);
+	data->num_of_must_eat = -1;
 	if (argc == 6)
-		data.num_of_must_eat = ft_atoi(argv[5]);
-	pthread_mutex_init(&data.print, NULL);	 
-	init_all_philo(&data);
+		data->num_of_must_eat = ft_atoi(argv[5]);
+	data->end = 0;
+	data->start_time = 0;
+	pthread_mutex_init(&data->print, NULL);
+	if (init_all_philo(data) == -1)
+		return (free(data), NULL);
 	return (data);
 }

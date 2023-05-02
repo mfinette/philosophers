@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   states.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxime <maxime@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:38:43 by maxime            #+#    #+#             */
-/*   Updated: 2023/04/24 12:39:31 by maxime           ###   ########.fr       */
+/*   Updated: 2023/05/02 11:49:41 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	eat_even(t_philo **tab_philo, t_data *data, int i)
 {
 	pthread_mutex_lock(&tab_philo[(i + 1) % data->num_of_philo]->fork);
-	if (print(tab_philo[i], data, 42) == -1)
+	if (print(tab_philo[i], data, TAKINGFORK) == -1)
 		return (pthread_mutex_unlock(&tab_philo[(i + 1) \
 		% data->num_of_philo]->fork), -1);
 	pthread_mutex_lock(&tab_philo[i]->fork);
-	if (print(tab_philo[i], data, 42) == -1)
+	if (print(tab_philo[i], data, TAKINGFORK) == -1)
 		return (pthread_mutex_unlock(&tab_philo[i]->fork), \
 		pthread_mutex_unlock(&tab_philo[(i + 1) % \
 		data->num_of_philo]->fork), -1);
@@ -31,10 +31,10 @@ int	eat_odd(t_philo **tab_philo, t_data *data, int i)
 	if (data->num_of_philo % 2 == 1)
 		usleep(500 * data->num_of_philo);
 	pthread_mutex_lock(&tab_philo[i]->fork);
-	if (print(tab_philo[i], data, 42) == -1)
+	if (print(tab_philo[i], data, TAKINGFORK) == -1)
 		return (pthread_mutex_unlock(&tab_philo[i]->fork), -1);
 	pthread_mutex_lock(&tab_philo[(i + 1) % data->num_of_philo]->fork);
-	if (print(tab_philo[i], data, 42) == -1)
+	if (print(tab_philo[i], data, TAKINGFORK) == -1)
 		return (pthread_mutex_unlock(&tab_philo[i]->fork) \
 		, pthread_mutex_unlock(&tab_philo[(i + 1) \
 		% data->num_of_philo]->fork), -1);
@@ -55,7 +55,6 @@ int	thinking(t_philo *philo, t_data *data)
 		return (-1);
 	return (0);
 }
-
 
 int	eating(t_philo **tab_philo, t_data *data, int i)
 {
