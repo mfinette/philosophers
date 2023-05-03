@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:17:14 by maxime            #+#    #+#             */
-/*   Updated: 2023/05/02 11:49:34 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:04:37 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	*life(void	*data_void)
 	philo = (t_philo *)data_void;
 	i = philo->id - 1;
 	get_starting_point(philo);
-	usleep(100 * philo->data->num_of_philo);
+	if (philo->id % 2 == 1)
+		custom_usleep(philo->data->num_of_philo / 10);
+		// custom_usleep(100 * philo->data->num_of_philo);
 	while (1)
 	{
 		if (eating(philo->data->tab_philo, philo->data, i) == -1)

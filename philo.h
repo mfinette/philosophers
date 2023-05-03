@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 11:13:08 by maxime            #+#    #+#             */
-/*   Updated: 2023/05/02 11:30:03 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:43:42 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ unsigned long long	get_time(void);
 int					print(t_philo *philo, t_data *data, int state);
 int					monitoring(t_data	*data);
 int					has_eaten_enough(t_philo *philo);
+void				custom_usleep(unsigned long long time_in_us);
+void	wait(unsigned long long time_ms);
 
 /* LIFE */
 void				get_starting_point(t_philo *philo);

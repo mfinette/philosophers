@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:51:43 by maxime            #+#    #+#             */
-/*   Updated: 2023/05/01 18:28:47 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:02:22 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,14 @@ int	has_eaten_enough(t_philo *philo)
 	if (philo->eat_count < philo->data->num_of_must_eat)
 		return (0);
 	return (1);
+}
+
+void	custom_usleep(unsigned long long time_ms)
+{
+	unsigned long long	time;
+
+	time = get_time();
+	usleep(time_ms * 900);
+	while (get_time() - time < time_ms)
+		usleep(100);
 }
