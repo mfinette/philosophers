@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:00:06 by maxime            #+#    #+#             */
-/*   Updated: 2023/05/01 18:18:59 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:07:07 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,6 @@ unsigned long long	get_time(void)
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-}
-
-void	wait(unsigned long long time_ms)
-{
-	unsigned long long	time;
-
-	time = get_time();
-	usleep(time_ms * 900);
-	while (get_time() - time < time_ms)
-		usleep(100);
 }
 
 int	print(t_philo *philo, t_data *data, int state)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxime <maxime@student.42.fr>              +#+  +:+       +#+        */
+/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:54:05 by maxime            #+#    #+#             */
-/*   Updated: 2023/04/24 12:54:18 by maxime           ###   ########.fr       */
+/*   Updated: 2023/05/04 11:30:31 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_dead(t_philo *philo, t_data *data)
 {
-	if (get_time() - data->start_time >= philo->last_eat + data->time_to_die)
+	if (get_time() - data->start_time > philo->last_eat + data->time_to_die)
 	{
 		pthread_mutex_unlock(&data->print);
 		print(philo, data, DEAD);

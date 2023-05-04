@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 11:40:18 by maxime            #+#    #+#             */
-/*   Updated: 2023/05/02 11:31:14 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:18:27 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	check_args(int argc, char **argv)
 
 	if (argc > 6 || argc < 5)
 		return (0);
-	i = 0;
-	while (i < argc - 1)
+	i = 1;
+	while (i < argc)
 	{
-		if (!check_str(argv[1]))
+		if (!check_str(argv[i]))
 			return (0);
 		i++;
 	}

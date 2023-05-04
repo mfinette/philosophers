@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   life.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:17:14 by maxime            #+#    #+#             */
-/*   Updated: 2023/05/03 18:11:47 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:31:57 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ void	*life(void	*data_void)
 	philo = (t_philo *)data_void;
 	i = philo->id - 1;
 	get_starting_point(philo);
+	if (philo->data->num_of_philo == 1)
+		return (printf("0 1 has taken a fork\n"), NULL);
 	if (philo->id % 2 == 1)
 	{
 		if (thinking(philo, philo->data) == -1)
 			return (NULL);
-		custom_usleep(philo->data->time_to_eat / 20);
-		// custom_usleep(100 * philo->data->num_of_philo);
+		custom_usleep(philo->data->time_to_eat / 30);
 	}
 	while (1)
 	{
