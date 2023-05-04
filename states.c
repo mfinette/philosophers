@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 12:38:43 by maxime            #+#    #+#             */
-/*   Updated: 2023/05/03 18:02:41 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:15:37 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	eating(t_philo **tab_philo, t_data *data, int i)
 	tab_philo[i]->last_eat = get_time() - data->start_time;
 	tab_philo[i]->eat_count++;
 	pthread_mutex_unlock(&data->print);
-	wait(data->time_to_eat);
+	custom_usleep(data->time_to_eat);
 	pthread_mutex_unlock(&tab_philo[i]->fork);
 	pthread_mutex_unlock(&tab_philo[(i + 1) % data->num_of_philo]->fork);
 	return (0);
